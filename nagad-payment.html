@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nagad Payment - Shekha Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Nagad Payment</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Enter your Nagad Number</h2>
+        <input type="text" id="nagad-number" placeholder="Nagad Number">
+        <button id="nagad-pay-btn">Confirm Payment</button>
+    </main>
+
+    <script>
+        document.getElementById("nagad-pay-btn").addEventListener("click", function () {
+            let number = document.getElementById("nagad-number").value;
+            if (number.length === 11) {
+                alert("✅ Payment successful via Nagad!");
+                localStorage.removeItem("cart");
+                window.location.href = "order-history.html";
+            } else {
+                alert("❌ Invalid Nagad number.");
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat - Shekha Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Live Chat Support</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="chat-box"></div>
+        <input type="text" id="chat-input" placeholder="Type a message...">
+        <button id="send-message">Send</button>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const chatRef = ref(db, "chats");
+
+        document.getElementById("send-message").addEventListener("click", function () {
+            let message = document.getElementById("chat-input").value;
+            if (message.trim() !== "") {
+                push(chatRef, { text: message });
+                document.getElementById("chat-input").value = "";
+            }
+        });
+
+        onChildAdded(chatRef, (snapshot) => {
+            let message = snapshot.val().text;
+            let chatBox = document.getElementById("chat-box");
+            let p = document.createElement("p");
+            p.innerText = message;
+            chatBox.appendChild(p);
+        });
+    </script>
+
+</body>
+</html>

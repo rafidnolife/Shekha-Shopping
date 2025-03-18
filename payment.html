@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Shekha Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Payment</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Select Payment Method</h2>
+        <button id="bkash-pay">Pay with bKash</button>
+        <button id="nagad-pay">Pay with Nagad</button>
+    </main>
+
+    <script>
+        document.getElementById("bkash-pay").addEventListener("click", function () {
+            window.location.href = "bkash-payment.html";
+        });
+
+        document.getElementById("nagad-pay").addEventListener("click", function () {
+            window.location.href = "nagad-payment.html";
+        });
+    </script>
+
+</body>
+</html>

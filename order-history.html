@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Shekha Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Order History</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Past Orders</h2>
+        <ul id="order-history"></ul>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let username = localStorage.getItem("loggedInUser");
+            let orders = JSON.parse(localStorage.getItem("orderHistory")) || {};
+            let orderHistory = document.getElementById("order-history");
+
+            if (username && orders[username]) {
+                orders[username].forEach(order => {
+                    let li = document.createElement("li");
+                    li.innerText = `Order: ${order.items.length} items, Total: $${order.total}`;
+                    orderHistory.appendChild(li);
+                });
+            } else {
+                orderHistory.innerText = "No orders found.";
+            }
+        });
+    </script>
+
+</body>
+</html>

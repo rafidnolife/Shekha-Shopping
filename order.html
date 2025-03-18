@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details - Shekha Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Order Details</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Order</h2>
+        <ul id="order-list"></ul>
+        <p>Total: $<span id="order-total">0</span></p>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let order = JSON.parse(localStorage.getItem("order")) || [];
+            let orderList = document.getElementById("order-list");
+            let orderTotal = document.getElementById("order-total");
+
+            let total = 0;
+            order.forEach(item => {
+                let li = document.createElement("li");
+                li.innerText = `${item.name} - $${item.price} x ${item.quantity}`;
+                orderList.appendChild(li);
+                total += item.price * item.quantity;
+            });
+
+            orderTotal.innerText = total;
+        });
+    </script>
+
+</body>
+</html>

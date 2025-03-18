@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Shekha Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Admin Panel</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Add Product</h2>
+        <input type="text" id="product-name" placeholder="Product Name">
+        <input type="number" id="product-price" placeholder="Price">
+        <input type="number" id="product-stock" placeholder="Stock Quantity">
+        <input type="text" id="product-image" placeholder="Image URL">
+        <button id="add-product">Add Product</button>
+
+        <h2>Product List</h2>
+        <ul id="admin-product-list"></ul>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            let productList = document.getElementById("admin-product-list");
+
+            function updateProductList() {
+                productList.innerHTML = "";
+                products.forEach((product, index) => {
+                    let li = document.createElement("li");
+                    li.innerHTML = `
+                        ${product.name} - $${product.price} (Stock: ${product.stock})
+                        <button class="delete" data-index="${index}">❌</button>
+                    `;
+                    productList.appendChild(li);
+                });
+
+                document.querySelectorAll(".delete").forEach(button => {
+                    button.addEventListener("click", function () {
+                        let index = this.getAttribute("data-index");
+                        products.splice(index, 1);
+                        localStorage.setItem("products", JSON.stringify(products));
+                        updateProductList();
+                    });
+                });
+            }
+
+            document.getElementById("add-product").addEventListener("click", function () {
+                let name = document.getElementById("product-name").value;
+                let price = document.getElementById("product-price").v
+<input type="text" id="product-category" placeholder="Category">
+<h2>Manage Orders</h2>
+<ul id="order-list"></ul>
+<h2>Affiliate Earnings</h2>
+<ul id="commission-list"></ul>
+<h2>All Orders</h2>
+<ul id="order-list"></ul>
+<h2>Update Order Status</h2>
+<input type="text" id="order-id" placeholder="Enter Order ID">
+<select id="order-status">
+    <option value="Pending">Pending</option>
+    <option value="Shipped">Shipped</option>
+    <option value="Delivered">Delivered</option>
+</select>
+<button onclick="updateOrderStatus(document.getElementById('order-id').value, document.getElementById('order-status').value)">Update</button>
+<h2>Add Coupon</h2>
+<input type="text" id="coupon-code" placeholder="Enter Coupon Code">
+<input type="number" id="discount" placeholder="Enter Discount %">
+<button onclick="addCoupon(document.getElementById('coupon-code').value, document.getElementById('discount').value)">Add Coupon</button>

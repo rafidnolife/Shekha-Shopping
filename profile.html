@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Shekha Shopping</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>User Profile</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Profile Information</h2>
+        <p><strong>Name:</strong> <span id="user-name"></span></p>
+        <p><strong>Email:</strong> <span id="user-email"></span></p>
+
+        <h2>Order History</h2>
+        <ul id="user-orders"></ul>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let user = JSON.parse(localStorage.getItem("user")) || { name: "Guest", email: "N/A" };
+            document.getElementById("user-name").innerText = user.name;
+            document.getElementById("user-email").innerText = user.email;
+
+            let orders = JSON.parse(localStorage.getItem("orders")) || [];
+            let orderList = document.getElementById("user-orders");
+
+            orders.forEach((order, index) => {
+                let li = document.createElement("li");
+                li.innerHTML = `Order #${index + 1} - ${order.status}`;
+                orderList.appendChild(li);
+            });
+        });
+    </script>
+
+</body>
+</html>
+<h2>Affiliate Marketing</h2>
+<p>Share this link & earn commission:</p>
+<a id="affiliate-link" href="#" target="_blank"></a>
+<h2>User Profile</h2>
+<p id="user-email"></p>
+<a href="index.html">Back to Home</a>
